@@ -7,14 +7,28 @@ var multilevel = require("multilevel"),
 createClient = function(opts) {
   db = multilevel.client();
 
-  connStr = url.format({protocol: "http", hostname: opts.host, port: opts.port});
-
-  reconnect(function(conn){
-    console.log("connection reestablished");
+  strm = reconnect(function(conn){
+    console.log("connected");
     conn.pipe(db.createRpcStream()).pipe(conn);
 
-  }).connect(connStr);
+  }).connect(opts);
+  // strm.reconnect = false;
   
+  strm.on("disconnect", function(){
+    console.log("disconnect");
+  });
+
+  strm.on("backoff", function(attempts, delay){
+    console.log("backoff reconnect",attempts);
+  });
+
+  strm.on("reconnect", function(){
+    console.log("reconnect attempting");
+  });
+  
+  db.reconnectOff = function(){
+    strm.reconnect = false;
+  }
 
   return db
 
