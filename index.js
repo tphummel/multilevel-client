@@ -8,22 +8,21 @@ createClient = function(opts) {
   db = multilevel.client();
 
   strm = reconnect(function(conn){
-    console.log("connected");
+    console.log("[multilevel-client] connected ", new Date;
     conn.pipe(db.createRpcStream()).pipe(conn);
 
   }).connect(opts);
-  // strm.reconnect = false;
   
   strm.on("disconnect", function(){
-    console.log("disconnect");
+    console.log("[multilevel-client] disconnect", new Date);
   });
 
   strm.on("backoff", function(attempts, delay){
-    console.log("backoff reconnect",attempts);
+    console.log("[multilevel-client] backoff reconnect", attempts, new Date;
   });
 
   strm.on("reconnect", function(){
-    console.log("reconnect attempting");
+    console.log("[multilevel-client] reconnect attempting", new Date;
   });
   
   db.reconnectOff = function(){
