@@ -6,8 +6,6 @@
   "scripts": {
     "test": "NODE_ENV=test node ./test"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "reconnect": "~1.5.2",
     "multilevel": "~5.5.0"
@@ -16,5 +14,23 @@
     "tape": "~2.3.2",
     "memdown": "~0.6.0",
     "levelup": "~0.18.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tphummel/multilevel-client.git"
+  },
+  "keywords": [
+    "multilevel",
+    "level",
+    "leveldb",
+    "reconnect"
+  ],
+  "author": {
+    "name": "Tom Hummel",
+    "email": "tphummel@gmail.com",
+    "url": "tomhummel.com"
+  },
+  "license": "MIT",
+  "bugs": "http://github.com/tphummel/multilevel-client/issues",
+  "homepage": "https://github.com/tphummel/multilevel-client"
 }
