@@ -28,8 +28,10 @@ createServer = function(opts) {
 }
 
 closeServer = function(server, cb){
+  console.log("close server");
   server.sockets.forEach(function(socket){
     socket.destroy();
+    console.log("destroy socket");
   });
   server.close(cb);
 }
@@ -45,6 +47,7 @@ test("should connect to server", function(t){
       t.notOk(err, "no err from get");
       t.equal(item, "value");
 
+      client.reconnectOff();
       client.close();
       server.close(function(){
         t.end();  
@@ -56,25 +59,31 @@ test("should connect to server", function(t){
 
 
 test("should auto reconnect after disconnect", function(t){
-  var server = createServer({port: "3000", path: "./db"}),
+  var serverOpts = {port: "3000", path: "./db"};
+  var server = createServer(serverOpts),
       client = createClient({host:"localhost", port: "3000"}),
       server;
 
   client.put("key", "value", function(err){
     t.notOk(err, "no err from put");
-    
+
     closeServer(server, function(){
-      server = createServer({port: "3000", path: "./db"});
+      setTimeout(function(){
+        server = createServer(serverOpts);
+        setTimeout(function(){
+          client.put("key", "value", function(err){
+            t.notOk(err, "no err from put after reconnect");
+            t.end();
 
-      client.get("key", function(err, item){
-        t.notOk(err, "no err from get");
-        t.equal(item, "value");
-
-        client.close();
-        server.close(function(){
-          t.end();  
-        });
-      });
+            client.reconnectOff();
+            client.close();
+            server.close(function(){
+              t.end();  
+            });
+          });
+        }, 100);
+      },1000);
     });
+
   });
 });
