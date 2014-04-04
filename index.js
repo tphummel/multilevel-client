@@ -1,7 +1,7 @@
 (function(){
   var multilevel = require("multilevel"),
       net        = require("net"),
-      reconnect  = require("reconnect"),
+      reconnect  = require("reconnect-net"),
       url        = require("url"),
       createClient;
 
