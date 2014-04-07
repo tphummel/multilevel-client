@@ -9,6 +9,11 @@
         strm;
 
     strm = reconnect(function(conn){
+
+      conn.on('error', function(e){
+        console.log('[multilevel-client] tcp err:', e);
+      });
+
       console.log("[multilevel-client] connected ", new Date);
       var rpc = db.createRpcStream();
       rpc.on('error', function(e){
