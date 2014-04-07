@@ -2,7 +2,8 @@
 
 connect to a [multilevel][0] server. w/ [reconnect][1]
 
-[![Build Status](https://travis-ci.org/tphummel/multilevel-client.png)](https://travis-ci.org/tphummel/multilevel-client)  
+[![Build Status](https://travis-ci.org/tphummel/multilevel-client.png)](https://travis-ci.org/tphummel/multilevel-client)
+
 [![NPM](https://nodei.co/npm/multilevel-client.png?downloads=true)](https://nodei.co/npm/multilevel-client)
 
 
@@ -11,7 +12,7 @@ connect to a [multilevel][0] server. w/ [reconnect][1]
     npm install multilevel-client
 
 ## test
-    
+
     npm test
 
 ## usage
@@ -24,4 +25,4 @@ connect to a [multilevel][0] server. w/ [reconnect][1]
 
 
   [0]: https://github.com/juliangruber/multilevel
-  [1]: https://github.com/dominictarr/reconnect
+  [1]: https://github.com/juliangruber/reconnect-net
