@@ -1,7 +1,7 @@
 {
   "name": "multilevel-client",
   "version": "0.4.0",
-  "description": "",
+  "description": "multilevel client that automatically reconnects",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test node ./test"
