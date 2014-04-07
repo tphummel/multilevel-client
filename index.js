@@ -16,7 +16,7 @@
         console.log('[multilevel-client] rpcStreamError: ', e, new Date)
       });
       conn.pipe(rpc).pipe(conn);
-    
+
     }).connect(opts);
 
     strm.on("disconnect", function(){
@@ -30,12 +30,12 @@
     strm.on("reconnect", function(){
       console.log("[multilevel-client] reconnect attempting", new Date);
     });
-    
+
     db.reconnectOff = function(){
       strm.reconnect = false;
     }
 
-    return db
+    return db;
 
   }
 
