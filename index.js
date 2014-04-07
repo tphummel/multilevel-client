@@ -11,10 +11,14 @@
 
     strm = reconnect(function(conn){
       console.log("[multilevel-client] connected ", new Date);
-      conn.pipe(db.createRpcStream()).pipe(conn);
-
-    }).connect(opts);
+      var rpc = db.createRpcStream();
+      rpc.on('error', function(e){
+        console.log('[multilevel-client] rpcStreamError: ', e, new Date)
+      });
+      conn.pipe(rpc).pipe(conn);
     
+    }).connect(opts);
+
     strm.on("disconnect", function(){
       console.log("[multilevel-client] disconnect", new Date);
     });
